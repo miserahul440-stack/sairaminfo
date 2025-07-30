@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>साईराम कॉम्प्युटर - Digital Services</title>
+    <meta name="theme-color" content="#2A4784">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #2a4784 0%, #1976d2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 100vw; 
+            margin: 0; 
+            background: #f8f9fa; 
+            min-height: 100vh; 
+        }
+        .app-header { 
+            background: linear-gradient(135deg, #2a4784 0%, #1976d2 100%);
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(42, 71, 132, 0.3);
+        }
+        .app-logo { 
+            width: 100px; 
+            height: 100px; 
+            background: white; 
+            border-radius: 24px; 
+            margin: 0 auto 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .logo-text { 
+            font-size: 36px; 
+            font-weight: bold; 
+            color: #2a4784; 
+        }
+        .app-title { 
+            font-size: 28px; 
+            font-weight: 800; 
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .app-subtitle { 
+            font-size: 14px; 
+            opacity: 0.95; 
+            margin-bottom: 8px; 
+        }
+        .owner-info { 
+            font-size: 13px; 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            display: inline-block; 
+        }
+        .nav-tabs { 
+            background: white; 
+            display: flex; 
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08); 
+        }
+        .nav-tab { 
+            flex: 1; 
+            padding: 15px 8px; 
+            text-align: center; 
+            background: none; 
+            border: none; 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: #666; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+        }
+        .nav-tab.active { 
+            color: #2a4784; 
+            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%); 
+            border-top: 3px solid #2a4784; 
+        }
+        .content { 
+            padding: 20px 15px; 
+            background: #f8f9fa; 
+        }
+        .quick-actions { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 8px 25px rgba(42, 71, 132, 0.1); 
+        }
+        .quick-actions h3 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #2a4784; 
+            margin-bottom: 18px; 
+            text-align: center; 
+        }
+        .action-buttons { 
+            display: flex; 
+            gap: 15px; 
+        }
+        .action-btn { 
+            flex: 1; 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 16px; 
+            font-weight: 700; 
+            font-size: 15px; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+        }
+        .whatsapp-btn { 
+            background: linear-gradient(135deg, #25d366, #128c7e); 
+        }
+        .phone-btn { 
+            background: linear-gradient(135deg, #2a4784, #1976d2); 
+        }
+        .services-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 18px; 
+        }
+        .service-card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 25px 18px; 
+            text-align: center; 
+            box-shadow: 0 6px 20px rgba(42, 71, 132, 0.08); 
+            cursor: pointer; 
+            position: relative; 
+            border: 1px solid rgba(42, 71, 132, 0.05); 
+            transition: all 0.3s ease;
+        }
+        .service-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(42, 71, 132, 0.15); 
+        }
+        .service-card::before { 
+            content: ""; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 4px; 
+            background: linear-gradient(90deg, #2a4784, #1976d2); 
+        }
+        .service-icon { 
+            font-size: 36px; 
+            margin-bottom: 12px; 
+            display: block; 
+        }
+        .service-name { 
+            font-size: 15px; 
+            font-weight: 700; 
+            color: #2a4784; 
+            line-height: 1.4; 
+        }
+        .service-badge { 
+            position: absolute; 
+            top: 12px; 
+            right: 12px; 
+            background: linear-gradient(135deg, #ff4757, #ff3742); 
+            color: white; 
+            font-size: 9px; 
+            padding: 4px 8px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+        }
+        .hot-badge { 
+            background: linear-gradient(135deg, #ff6b35, #f7931e); 
+        }
+        .business-info { 
+            background: linear-gradient(135deg, #2a4784 0%, #1976d2 100%); 
+            color: white; 
+            border-radius: 20px; 
+            padding: 25px; 
+            text-align: center; 
+            margin-bottom: 25px; 
+            box-shadow: 0 8px 25px rgba(42, 71, 132, 0.2); 
+        }
+        .business-info h3 { 
+            font-size: 22px; 
+            font-weight: 800; 
+            margin-bottom: 15px; 
+        }
+        .business-address { 
+            font-size: 14px; 
+            line-height: 1.6; 
+            margin-bottom: 15px; 
+            opacity: 0.95; 
+        }
+        .business-hours { 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+        }
+        .hours-text { 
+            font-size: 18px; 
+            font-weight: 700; 
+            color: #ffd700; 
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @media (min-width: 768px) {
+            .container { max-width: 420px; margin: 0 auto; box-shadow: 0 0 30px rgba(42, 71, 132, 0.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="app-logo">
+                <div class="logo-text">सा</div>
+            </div>
+            <div class="app-title">साईराम कॉम्प्युटर</div>
+            <div class="app-subtitle">Digital Services & Internet Center</div>
+            <div class="owner-info">Rahul Mise | 📞 9011083440</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('services')">🏠 Home</button>
+            <button class="nav-tab" onclick="showTab('forms')">📝 Forms</button>
+            <button class="nav-tab" onclick="showTab('documents')">🆔 Documents</button>
+            <button class="nav-tab" onclick="showTab('contact')">📞 Contact</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Services Tab -->
+            <div id="services" class="tab-content active">
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>🚀 तातडीची सेवा Available</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn whatsapp-btn" onclick="openWhatsApp()">
+                            📱 WhatsApp Now
+                        </button>
+                        <button class="action-btn phone-btn" onclick="makeCall()">
+                            📞 Call Direct
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Government Services -->
+                <div class="services-grid">
+                    <div class="service-card" onclick="openService('सरकारी नोकरी अपडेट्स')">
+                        <div class="service-badge">NEW</div>
+                        <span class="service-icon">📋</span>
+                        <div class="service-name">सरकारी नोकरी<br>अपडेट्स</div>
+                    </div>
+                    <div class="service-card" onclick="openService('परीक्षा निकाल')">
+                        <span class="service-icon">📊</span>
+                        <div class="service-name">परीक्षा निकाल<br>& Results</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Print & Scan Services')">
+                        <span class="service-icon">🖨️</span>
+                        <div class="service-name">Print & Scan<br>Services</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Photo Studio')">
+                        <span class="service-icon">📸</span>
+                        <div class="service-name">Photo Studio<br>& Editing</div>
+                    </div>
+                    <div class="service-card" onclick="openService('शेतकरी योजना')">
+                        <div class="service-badge hot-badge">HOT</div>
+                        <span class="service-icon">🌾</span>
+                        <div class="service-name">शेतकरी योजना<br>& Schemes</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Computer Training')">
+                        <span class="service-icon">🎓</span>
+                        <div class="service-name">Computer<br>Training</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Tab -->
+            <div id="forms" class="tab-content">
+                <div class="services-grid">
+                    <div class="service-card" onclick="openService('महाविद्यालयीन फॉर्म')">
+                        <span class="service-icon">🏫</span>
+                        <div class="service-name">महाविद्यालयीन<br>फॉर्म भरणे</div>
+                    </div>
+                    <div class="service-card" onclick="openService('परीक्षा फॉर्म')">
+                        <span class="service-icon">📚</span>
+                        <div class="service-name">परीक्षा फॉर्म<br>& Applications</div>
+                    </div>
+                    <div class="service-card" onclick="openService('शिष्यवृत्ती फॉर्म')">
+                        <div class="service-badge">💰</div>
+                        <span class="service-icon">💰</span>
+                        <div class="service-name">शिष्यवृत्ती<br>Applications</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Job Application')">
+                        <span class="service-icon">💼</span>
+                        <div class="service-name">Job Application<br>Forms</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Tab -->
+            <div id="documents" class="tab-content">
+                <div class="services-grid">
+                    <div class="service-card" onclick="openService('PAN Card सेवा')">
+                        <div class="service-badge hot-badge">HOT</div>
+                        <span class="service-icon">🆔</span>
+                        <div class="service-name">PAN Card<br>All Services</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Aadhar Card सेवा')">
+                        <span class="service-icon">👤</span>
+                        <div class="service-name">Aadhar Card<br>Services</div>
+                    </div>
+                    <div class="service-card" onclick="openService('PF Withdrawal')">
+                        <span class="service-icon">🏦</span>
+                        <div class="service-name">PF Withdrawal<br>& Services</div>
+                    </div>
+                    <div class="service-card" onclick="openService('Passport सेवा')">
+                        <span class="service-icon">📘</span>
+                        <div class="service-name">Passport<br>Services</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="contact" class="tab-content">
+                <div class="business-info">
+                    <h3>📍 साईराम कॉम्प्युटर</h3>
+                    <div class="business-address">
+                        <strong>Address:</strong><br>
+                        In front of Thakre Murtikar,<br>
+                        Mangrulpir Road, Manora<br>
+                        <strong>Owner:</strong> Rahul Mise
+                    </div>
+                    <div class="business-hours">
+                        <h4>🕐 कामाचे तास</h4>
+                        <div class="hours-text">8:00 AM - 10:00 PM</div>
+                        <div style="font-size: 14px; margin-top: 5px;">सोमवार ते रविवार</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn whatsapp-btn" onclick="openWhatsApp()">
+                            📱 WhatsApp
+                        </button>
+                        <button class="action-btn phone-btn" onclick="makeCall()">
+                            📞 9011083440
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+
+        function openService(serviceName) {
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+
+            const message = `🙏 नमस्कार राहुल जी!
+
+साईराम कॉम्प्युटर App वरून संपर्क करत आहे.
+
+📋 Service Required: ${serviceName}
+
+कृपया यावर माहिती द्या:
+• Service charges किती आहेत?
+• काम पूर्ण होण्यासाठी किती वेळ लागेल?
+• आवश्यक documents कोणते आहेत?
+• कधी येऊन काम करवायचे?
+
+Location: In front of Thakre Murtikar, Mangrulpir Road, Manora
+
+धन्यवाद!`;
+
+            const whatsappUrl = `https://wa.me/919011083440?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, "_blank");
+        }
+
+        function openWhatsApp() {
+            const message = `🙏 नमस्कार राहुल जी!
+
+साईराम कॉम्प्युटर च्या App वरून संपर्क करत आहे.
+
+मला तुमच्या digital services बद्दल माहिती हवी आहे.
+आपला professional app खूप छान आहे! 👍
+
+Available services आणि charges बद्दल कृपया माहिती द्या.
+
+Location: Mangrulpir Road, Manora
+
+धन्यवाद!`;
+
+            const whatsappUrl = `https://wa.me/919011083440?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, "_blank");
+        }
+
+        function makeCall() {
+            window.location.href = "tel:9011083440";
+        }
+
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            });
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
